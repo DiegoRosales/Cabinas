@@ -1,4 +1,4 @@
-update=04/08/2014 11:51:18
+update=04/08/2014 14:45:23
 version=1
 last_client=eeschema
 [general]
@@ -12,10 +12,10 @@ EquName1=devcms
 version=1
 LastNetListRead=Cabinas.net
 UseCmpFile=1
-PadDrill=1.016000000000
-PadDrillOvalY=1.016000000000
-PadSizeH=1.524000000000
-PadSizeV=3.048000000000
+PadDrill=0.812800000000
+PadDrillOvalY=0.812800000000
+PadSizeH=1.397000000000
+PadSizeV=1.397000000000
 PcbTextSizeV=1.500000000000
 PcbTextSizeH=1.500000000000
 PcbTextThickness=0.300000000000
@@ -56,6 +56,7 @@ LibName24=D:/GitHub/KiCad_Libraries/Switches
 LibName25=D:/GitHub/KiCad_Libraries/Screws
 LibName26=D:/GitHub/KiCad_Libraries/CAP_POL
 LibName27=PinMod
+LibName28=ShiftReg
 [eeschema]
 version=1
 LibDir=
