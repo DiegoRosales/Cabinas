@@ -40,7 +40,7 @@ void setup() {
   
   mySerial.begin(115200);
   mySerial.println("Iniciando...");
-  Serial.begin(9600);
+  //Serial.begin(9600);
   Wire.begin(4);                // join i2c bus with address #4
   Wire.onReceive(receiveEvent); // register event
 
@@ -154,7 +154,7 @@ void loop() {
           secuencia[i] = seq3[i];
           // Repite la secuencia
         }
-        Serial.println("Leerbit");
+        //Serial.println("Leerbit");
         for (int i = 0; i < 3; i++)
           leerbit();
         apagar();
@@ -250,6 +250,11 @@ void loop() {
           apagar();
           break;
         
+        case 'd':
+          mySerial.println("Pista de demostración");
+          wtv020sd16p.asyncPlayVoice(0);
+          break;
+          
         default:
           mySerial.println("No se reconoció la instrucción");
           break;  

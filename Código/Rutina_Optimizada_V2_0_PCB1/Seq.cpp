@@ -49,7 +49,7 @@ void leerbit() {
             leerparo = mySerial.read();
         }
         if (leerparo == '0') {
-          Serial.println("PARO");
+          mySerial.println("PARO");
           paro = 1;
           leerparo = 0;
           wtv020sd16p.stopVoice(); // Comentario temporal
