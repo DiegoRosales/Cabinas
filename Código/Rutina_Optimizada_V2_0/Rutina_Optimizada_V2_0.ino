@@ -38,7 +38,7 @@ void setup() {
   for (int i = 6; i <= 9; i++)
     pinMode(i, OUTPUT);
   
-  mySerial.begin(115200);
+  mySerial.begin(9600);
   mySerial.println("inicio");
   Serial.begin(9600);
   Wire.begin(4);                // join i2c bus with address #4
