@@ -6,6 +6,7 @@
 
 #include <Wtv020sd16p.h>
 #include <SoftwareSerial.h>
+#include <ShiftReg.h>
 int resetPin = 2;  // The pin number of the reset pin.
 int clockPin = 3;  // The pin number of the clock pin.
 int dataPin = 4;  // The pin number of the data pin.
@@ -18,15 +19,37 @@ Create an instance of the Wtv020sd16p class.
  3rd parameter: Data pin number.
  4th parameter: Busy pin number.
  */
+
+ShiftReg shiftReg;
 Wtv020sd16p wtv020sd16p(resetPin,clockPin,dataPin,busyPin);
 SoftwareSerial mySerial(14, 15); // RX, TX
 void setup() {
   pinMode(dataPin, OUTPUT);
   pinMode(clockPin, OUTPUT);
-  mySerial.begin(115200);
+  mySerial.begin(9600);
+  Serial.begin(9600);
   //Initializes the module.
+  for (int i = 6; i <= 9; i++)
+    pinMode(i, OUTPUT);
+    
+  for(int n = 0; n<5; n++){
+      for (int i = 0; i < 12; i++)
+      shiftReg.digitalWriteMS(1, i, LOW);
+    for (int i = 0; i<12; i++){
+      shiftReg.digitalWriteMS(1, i, HIGH);
+      //delay(10);
+    }
+    delay(50);
+    for (int i = 0; i<12; i++){
+      shiftReg.digitalWriteMS(1, i, LOW);
+      //delay(10);
+    }
+    delay(50);
+  }
+  
   wtv020sd16p.reset();
-  wtv020sd16p.asyncPlayVoice(3);
+  delay(300);
+  wtv020sd16p.playVoice(1);
 }
 
 void loop() {
@@ -51,8 +74,19 @@ void loop() {
  
   if(mySerial.available()){
     x = mySerial.parseInt();
-    mySerial.flush();
+    mySerial.println(x); 
     wtv020sd16p.asyncPlayVoice(x);
+    //mySerial.flush();
     mySerial.println(x);  
+  }
+  
+  if(Serial.available()){
+    Serial.println("Serial is available");
+    x = Serial.parseInt();
+    Serial.println("Serial Parseint");
+    Serial.println(x); 
+    wtv020sd16p.asyncPlayVoice(x);
+    //Serial.flush();
+    Serial.println(x);  
   }
 }
