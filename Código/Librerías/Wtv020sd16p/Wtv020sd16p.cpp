@@ -30,11 +30,13 @@ void Wtv020sd16p::reset(){
   digitalWrite(_resetPin, HIGH);
   //Reset pulse.
   digitalWrite(_resetPin, LOW);
-  delay(5);
+  delay(/*5*/100);
   digitalWrite(_resetPin, HIGH);
   //Reset idle to start bit. 
   digitalWrite(_clockPin, HIGH);
-  delay(300);
+  digitalWrite(5, HIGH);
+  delay(/*300*/ 600);
+  digitalWrite(5, LOW);
 }
 
 void Wtv020sd16p::playVoice(int voiceNumber){  
@@ -72,7 +74,7 @@ void Wtv020sd16p::sendCommand(unsigned int command) {
   for (unsigned int mask = 0x8000; mask > 0; mask >>= 1) {
     //Clock low level pulse.
     digitalWrite(_clockPin, LOW);
-    delayMicroseconds(50);
+    delayMicroseconds(/*50*/250);
     //Write data setup.
     if (command & mask) {
       digitalWrite(_dataPin, HIGH);
@@ -81,15 +83,15 @@ void Wtv020sd16p::sendCommand(unsigned int command) {
       digitalWrite(_dataPin, LOW);
     }
     //Write data hold.
-    delayMicroseconds(50);
+    delayMicroseconds(/*50*/250);
     //Clock high level pulse.
     digitalWrite(_clockPin, HIGH);
-    delayMicroseconds(100);
+    delayMicroseconds(250);
     if (mask>0x0001){
       //Stop bit high level pulse.
-      delay(2);      
+      delay(/*2*/4);      
     }
   }
   //Busy active high from last data bit latch.
-  delay(20);
+  delay(40);
 }
