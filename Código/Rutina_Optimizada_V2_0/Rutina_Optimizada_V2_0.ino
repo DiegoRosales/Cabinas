@@ -15,6 +15,7 @@ int clockPin = 3;   // The pin number of the clock pin.
 int dataPin = 4;    // The pin number of the data pin.
 int busyPin = 5;    // The pin number of the busy pin
 
+// ---- Global variables ---
 int n;               // Variable auxiliar para determinar pin de salida del Arduino
 int rutina;          // Número de rutina
 int secuencia[20];   // Matriz de transferencia/copia de secuencias
@@ -24,44 +25,59 @@ bool ROJO = false;
 bool AZUL = false;
 bool VERDE = false;
 
-
+// --- Modules ---
+ShiftReg shiftReg;
 Wtv020sd16p wtv020sd16p(resetPin, clockPin, dataPin, busyPin); //Se declara el modulo MP3
 SoftwareSerial mySerial(14, 15); // RX, TX
 bool I2C = false;
-ShiftReg shiftReg;
+
 
 void setup() {
-  //Initializes the module.
-  pinMode(dataPin, OUTPUT);
-  pinMode(clockPin, OUTPUT);
-
-  //Set digital pins as output
-  for (int i = 6; i <= 9; i++)
-    pinMode(i, OUTPUT);
-
+  /*--------------------------------------------*/
+  /*  Bluetooth Module & Serial Initialization  */
   mySerial.begin(9600);
   mySerial.println("inicio");
   Serial.begin(9600);
+  
+  /*----------------------*/
+  /*  I2C Initialization  */
   Wire.begin(4);                // join i2c bus with address #4
   Wire.onReceive(receiveEvent); // register event
 
-  for (int i = 0; i < 12; i++)
+  /*----------------------------------*/
+  /*  Shift Registers Initialization  */ 
+  for (int i = 6; i <= 9; i++)
+    pinMode(i, OUTPUT);
+  /* Welcome sequence */
+  for (int i = 0; i < 12; i++) // All off
     shiftReg.digitalWriteMS(1, i, LOW);
-  for (int i = 0; i < 12; i++) {
+  for (int i = 0; i < 12; i++){ // All on
     shiftReg.digitalWriteMS(1, i, HIGH);
     delay(50);
   }
-  for (int i = 0; i < 12; i++) {
+  for (int i = 0; i < 12; i++) { // All off
     shiftReg.digitalWriteMS(1, i, LOW);
     delay(50);
   }
-
-  wtv020sd16p.reset();
-  delay(300);
-  wtv020sd16p.playVoice(1);
+  delay(1000);
+  /*-----------------------------*/
+  /*  MP3 Module Initialization  */
+  pinMode(dataPin, OUTPUT);
+  pinMode(clockPin, OUTPUT);
+  wtv020sd16p.reset(); // MP3 Reset
+  while(digitalRead(busyPin) == HIGH){
+    Serial.println("Loading...");
+    delay(100);
+  }
+  //wtv020sd16p.playVoice(1); // Test
+  
+  // Controller is ready
   mySerial.println("Ready!!");
+  Serial.println("Ready!!");
 }
 
+//------------------------------
+//------------------------------
 // Rutina de interrupción de I2C
 void receiveEvent(int howMany)
 {
@@ -81,14 +97,20 @@ void loop() {
     leerparo = 0;
     paro = 0;
     // Decide de dónde vino la información
-    if (!I2C)
+    if (mySerial.available()) // Modulo bluetooth
       rutina = mySerial.read();
-    else
+    else if(I2C) // Botonera
       mySerial.println("I2C");
+    else // Ventana de comando
+      rutina = Serial.read();
     I2C = false;
     mySerial.flush();
     mySerial.print("La rutina es: "); // Prueba
     mySerial.println(rutina); // Prueba
+    
+    Serial.flush();
+    Serial.print("La rutina es: "); // Prueba
+    Serial.println(rutina); // Prueba
 
     switch (rutina) {
 
@@ -100,14 +122,9 @@ void loop() {
         mySerial.print("Secuencia ");
         mySerial.print(rutina);
         mySerial.println();
-        wtv020sd16p.reset();
+        //wtv020sd16p.reset();
         delay(300);
-        for(int i=0; i<5; i++){
-          wtv020sd16p.asyncPlayVoice(1); // Comentario temporal
-          delay(500);
-          if(digitalRead(busyPin) == true)
-            i=5;
-         }
+        wtv020sd16p.asyncPlayVoice(1); // Comentario temporal
         // Buffer de la secuencia
         for (int i = 0; i < 20; i++)
           secuencia[i] = seq1[i];
