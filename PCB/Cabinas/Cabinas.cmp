@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 04/08/2014 13:42:14
+Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 11/09/2014 12:47:29
 
 BeginCmp
 TimeStamp = /538DF7F4;
@@ -32,14 +32,14 @@ BeginCmp
 TimeStamp = /53B3051F;
 Reference = C4;
 ValeurCmp = 0.1uF;
-IdModule  = C1;
+IdModule  = C1V5;
 EndCmp
 
 BeginCmp
 TimeStamp = /53B30519;
 Reference = C5;
 ValeurCmp = 0.1uF;
-IdModule  = C1;
+IdModule  = C1V5;
 EndCmp
 
 BeginCmp
@@ -57,13 +57,6 @@ IdModule  = CAP_8_3.5;
 EndCmp
 
 BeginCmp
-TimeStamp = /53B2FFCD;
-Reference = C8;
-ValeurCmp = 47uF;
-IdModule  = C1V5;
-EndCmp
-
-BeginCmp
 TimeStamp = /53B35196;
 Reference = C9;
 ValeurCmp = 1uF;
@@ -73,20 +66,6 @@ EndCmp
 BeginCmp
 TimeStamp = /53B351A3;
 Reference = C10;
-ValeurCmp = 1uF;
-IdModule  = C1V5;
-EndCmp
-
-BeginCmp
-TimeStamp = /53B37614;
-Reference = C11;
-ValeurCmp = 1uF;
-IdModule  = C1V5;
-EndCmp
-
-BeginCmp
-TimeStamp = /53B370A2;
-Reference = C12;
 ValeurCmp = 1uF;
 IdModule  = C1V5;
 EndCmp
@@ -267,37 +246,16 @@ IdModule  = LED-5MM;
 EndCmp
 
 BeginCmp
-TimeStamp = /53B37093;
-Reference = ELEC1;
-ValeurCmp = ELECTRET_MIC_SUP;
-IdModule  = pin_array_3x2;
+TimeStamp = /54120B07;
+Reference = D25;
+ValeurCmp = DIODE;
+IdModule  = D3;
 EndCmp
 
 BeginCmp
-TimeStamp = /53BD775B;
-Reference = GS1;
-ValeurCmp = GS3;
-IdModule  = GS3;
-EndCmp
-
-BeginCmp
-TimeStamp = /53BEC90A;
-Reference = GS2;
-ValeurCmp = GS3;
-IdModule  = GS3;
-EndCmp
-
-BeginCmp
-TimeStamp = /53B39B72;
-Reference = J1;
-ValeurCmp = JACK_ST_3SW;
-IdModule  = pin_array_3x2;
-EndCmp
-
-BeginCmp
-TimeStamp = /53972746;
-Reference = JP1;
-ValeurCmp = JUMPER;
+TimeStamp = /5412285E;
+Reference = FB1;
+ValeurCmp = FILTER;
 IdModule  = PIN_ARRAY_2X1;
 EndCmp
 
@@ -313,6 +271,13 @@ TimeStamp = /53861CF7;
 Reference = K1;
 ValeurCmp = CONN_3;
 IdModule  = bornier3;
+EndCmp
+
+BeginCmp
+TimeStamp = /54122187;
+Reference = K2;
+ValeurCmp = CONN_3;
+IdModule  = PIN_ARRAY_3X1;
 EndCmp
 
 BeginCmp
@@ -589,69 +554,6 @@ IdModule  = R3;
 EndCmp
 
 BeginCmp
-TimeStamp = /53B2F8E7;
-Reference = R18;
-ValeurCmp = 10k;
-IdModule  = R3;
-EndCmp
-
-BeginCmp
-TimeStamp = /53B2F8F4;
-Reference = R19;
-ValeurCmp = 10k;
-IdModule  = R3;
-EndCmp
-
-BeginCmp
-TimeStamp = /53B2DEBB;
-Reference = R20;
-ValeurCmp = 270k;
-IdModule  = R3;
-EndCmp
-
-BeginCmp
-TimeStamp = /53B2DEC7;
-Reference = R21;
-ValeurCmp = 10k;
-IdModule  = R3;
-EndCmp
-
-BeginCmp
-TimeStamp = /53B2DEAE;
-Reference = R22;
-ValeurCmp = 10k;
-IdModule  = R3;
-EndCmp
-
-BeginCmp
-TimeStamp = /53B2E86E;
-Reference = R23;
-ValeurCmp = 10k;
-IdModule  = R3;
-EndCmp
-
-BeginCmp
-TimeStamp = /53B2DEC1;
-Reference = R24;
-ValeurCmp = 10k;
-IdModule  = R3;
-EndCmp
-
-BeginCmp
-TimeStamp = /53B38E3B;
-Reference = R25;
-ValeurCmp = 2.2k;
-IdModule  = R3;
-EndCmp
-
-BeginCmp
-TimeStamp = /53B379AD;
-Reference = R26;
-ValeurCmp = 10k;
-IdModule  = R3;
-EndCmp
-
-BeginCmp
 TimeStamp = /53B35187;
 Reference = REG1;
 ValeurCmp = NPC1700;
@@ -743,9 +645,51 @@ IdModule  = TactileSW_2;
 EndCmp
 
 BeginCmp
-TimeStamp = /538E36F5;
+TimeStamp = /5411CF49;
+Reference = SW13;
+ValeurCmp = PUSHBUTTON;
+IdModule  = TactileSW_2;
+EndCmp
+
+BeginCmp
+TimeStamp = /5411CF4F;
+Reference = SW14;
+ValeurCmp = PUSHBUTTON;
+IdModule  = TactileSW_2;
+EndCmp
+
+BeginCmp
+TimeStamp = /5411CF55;
+Reference = SW15;
+ValeurCmp = PUSHBUTTON;
+IdModule  = TactileSW_2;
+EndCmp
+
+BeginCmp
+TimeStamp = /54121AC6;
+Reference = TP1;
+ValeurCmp = CONN_3;
+IdModule  = PIN_ARRAY_3X1;
+EndCmp
+
+BeginCmp
+TimeStamp = /541215BD;
+Reference = TP2;
+ValeurCmp = CONN_2;
+IdModule  = PIN_ARRAY_2X1;
+EndCmp
+
+BeginCmp
+TimeStamp = /54121A5A;
+Reference = TP3;
+ValeurCmp = CONN_2;
+IdModule  = PIN_ARRAY_2X1;
+EndCmp
+
+BeginCmp
+TimeStamp = /53DFD57F;
 Reference = U1;
-ValeurCmp = BTM;
+ValeurCmp = BTM_2;
 IdModule  = btm_2;
 EndCmp
 
@@ -754,13 +698,6 @@ TimeStamp = /53971B4D;
 Reference = U2;
 ValeurCmp = 7805;
 IdModule  = TO220_VERT;
-EndCmp
-
-BeginCmp
-TimeStamp = /53B2DE7E;
-Reference = U3;
-ValeurCmp = TL072;
-IdModule  = DIP-8__300_ELL;
 EndCmp
 
 BeginCmp

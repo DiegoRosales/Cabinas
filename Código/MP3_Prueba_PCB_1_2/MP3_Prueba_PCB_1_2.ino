@@ -49,6 +49,10 @@ void setup() {
   
   wtv020sd16p.reset();
   delay(300);
+  while(digitalRead(busyPin) == HIGH){
+    Serial.println("Loading...");
+  }
+  Serial.println("Loading completed!");
   wtv020sd16p.playVoice(1);
 }
 

@@ -36,7 +36,7 @@ void setup() {
   /*--------------------------------------------*/
   /*  Bluetooth Module & Serial Initialization  */
   mySerial.begin(9600);
-  mySerial.println("inicio");
+  mySerial.println("Iniciando...");
   Serial.begin(9600);
   
   /*----------------------*/
@@ -66,14 +66,23 @@ void setup() {
   pinMode(clockPin, OUTPUT);
   wtv020sd16p.reset(); // MP3 Reset
   while(digitalRead(busyPin) == HIGH){
-    Serial.println("Loading...");
+    Serial.println("Cargando MP3...");
+    mySerial.println("Cargando MP3...");
     delay(100);
   }
+  wtv020sd16p.unmute();
   //wtv020sd16p.playVoice(1); // Test
   
   // Controller is ready
-  mySerial.println("Ready!!");
-  Serial.println("Ready!!");
+  mySerial.println("Listo!!");
+  mySerial.println("Favor de ingresar la rutina...");
+  mySerial.println("------------------------------");
+  mySerial.println();
+  
+  Serial.println("Listo!!");
+  Serial.println("Favor de ingresar la rutina...");
+  Serial.println("------------------------------");
+  Serial.println();
 }
 
 //------------------------------
@@ -105,12 +114,14 @@ void loop() {
       rutina = Serial.read();
     I2C = false;
     mySerial.flush();
-    mySerial.print("La rutina es: "); // Prueba
+    mySerial.print("El numero de codigo es: "); // Prueba
     mySerial.println(rutina); // Prueba
+    mySerial.println();
     
     Serial.flush();
-    Serial.print("La rutina es: "); // Prueba
+    Serial.print("El numero de codigo es: "); // Prueba
     Serial.println(rutina); // Prueba
+    Serial.println();
 
     switch (rutina) {
 
@@ -124,7 +135,17 @@ void loop() {
         mySerial.println();
         //wtv020sd16p.reset();
         delay(300);
-        wtv020sd16p.asyncPlayVoice(1); // Comentario temporal
+        switch(rutina){
+          case '1':
+            wtv020sd16p.asyncPlayVoice(0); // Comentario temporal
+            break;
+          case '2':
+            wtv020sd16p.asyncPlayVoice(1);
+            break;
+          case '3':
+            wtv020sd16p.asyncPlayVoice(2);
+            break;
+        }
         // Buffer de la secuencia
         for (int i = 0; i < 20; i++)
           secuencia[i] = seq1[i];
@@ -137,7 +158,7 @@ void loop() {
         paro = 0;
         mySerial.print("Secuencia 4");
         mySerial.println();
-        wtv020sd16p.asyncPlayVoice(4); // Comentario temporal
+        wtv020sd16p.asyncPlayVoice(3); // Comentario temporal
         // Buffer de la secuencia
         for (int i = 0; i < 20; i++)
           secuencia[i] = seq1[i];
@@ -168,7 +189,7 @@ void loop() {
         paro = 0;
         mySerial.print("Secuencia 6");
         mySerial.println();
-        wtv020sd16p.asyncPlayVoice(4); // Comentario temporal
+        wtv020sd16p.asyncPlayVoice(5); // Comentario temporal
         // Buffer de la secuencia
         for (int i = 0; i < 20; i++) {
           secuencia[i] = seq3[i];
@@ -182,8 +203,37 @@ void loop() {
 
         /*---- COLORES SÓLIDOS ---*/
 
-        // Rojo
+        // Azul
       case '7':
+        if (!paro) {
+          if (!AZUL)
+            mySerial.println("Color azul encendido");
+          else
+            mySerial.println("Color azul apagado");
+
+          leerparo = mySerial.read();
+          if (leerparo == 'x') {
+            mySerial.println("PARO");
+            paro = 1;
+            apagar();
+            AZUL = true;
+          }
+          // Enciende los LEDs
+          for (int i = 0; i < 12; i = i + 3) {
+            if (!AZUL)
+              shiftReg.digitalWriteMS(1, i, HIGH);
+            else
+              shiftReg.digitalWriteMS(1, i, LOW);
+          }
+          AZUL = !AZUL;
+        }
+        paro = 0;
+        mySerial.println("----------------------------");
+        mySerial.println();
+        break;
+
+        // Rojo
+      case '8':
         if (!paro) {
           if (!ROJO)
             mySerial.println("Color rojo encendido");
@@ -198,19 +248,21 @@ void loop() {
             ROJO = true;
           }
           // Enciende los LEDs
-          for (int i = 0; i < 12; i = i + 3) {
-            if (!ROJO)
+          for (int i = 1; i < 12; i = i + 3) {
+            if (!VERDE)
               shiftReg.digitalWriteMS(1, i, HIGH);
             else
               shiftReg.digitalWriteMS(1, i, LOW);
           }
-          ROJO = !ROJO;
         }
+        ROJO = !ROJO;
         paro = 0;
+        mySerial.println("----------------------------");
+        mySerial.println();
         break;
 
         // Verde
-      case '8':
+      case '9':
         if (!paro) {
           if (!VERDE)
             mySerial.println("Color verde encendido");
@@ -224,49 +276,23 @@ void loop() {
             apagar();
             VERDE = true;
           }
+
           // Enciende los LEDs
-          for (int i = 1; i < 12; i = i + 3) {
+          for (int i = 2; i < 12; i = i + 3) {
             if (!VERDE)
               shiftReg.digitalWriteMS(1, i, HIGH);
             else
               shiftReg.digitalWriteMS(1, i, LOW);
           }
-        }
-        VERDE = !VERDE;
-        paro = 0;
-        break;
-
-        // Azul
-      case '9':
-        if (!paro) {
-          if (!AZUL)
-            mySerial.println("Color azul encendido");
-          else
-            mySerial.println("Color azul apagado");
-
-          leerparo = mySerial.read();
-          if (leerparo == 'x') {
-            mySerial.println("PARO");
-            paro = 1;
-            apagar();
-            AZUL = true;
-          }
-
-          // Enciende los LEDs
-          for (int i = 2; i < 12; i = i + 3) {
-            if (!AZUL)
-              shiftReg.digitalWriteMS(1, i, HIGH);
-            else
-              shiftReg.digitalWriteMS(1, i, LOW);
-          }
-          AZUL = !AZUL;
+          VERDE = !VERDE;
         }
         paro = 0;
+        mySerial.println("----------------------------");
+        mySerial.println();
         break;
 
         // Se apaga todo
       case 'x':
-        mySerial.println("PARO");
         apagar();
         break;
 

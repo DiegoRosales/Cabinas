@@ -14,6 +14,7 @@ extern bool AZUL;
 
 /* Función para apagar todos los LEDs y el MP3 */
 void apagar() {
+  mySerial.println("Deteniendo, por favor espere...");
   for (int i = 0; i < 12; i++) {
     shiftReg.digitalWriteMS(1, i, LOW);
   }
@@ -22,6 +23,9 @@ void apagar() {
   ROJO = false;
   VERDE = false;
   AZUL = false;
+  mySerial.println("Todo listo!");
+  mySerial.println("----------------------------");
+  mySerial.println();
 }
 
 // Ejecuta la rutina
@@ -35,7 +39,6 @@ void leerbit() {
     mySerial.print(secuencia[i + 1]);
     mySerial.println();
     for (int j = 0; j < 15; j++) {
-      
       n = 2;
       // Se detiene
       if (paro)
@@ -48,7 +51,9 @@ void leerbit() {
             leerparo = mySerial.read();
         }
         if (leerparo == 'x') {
-          Serial.println("PARO");
+          mySerial.println("-----");
+          mySerial.println("PARO");
+          mySerial.println("-----");
           paro = 1;
           leerparo = 0;
           wtv020sd16p.stopVoice(); // Comentario temporal
@@ -66,8 +71,11 @@ void leerbit() {
         n++;
       }
       
+      if(paro)
+        break;
       // Se espera 1 segundo
       mySerial.println();
+      //mySerial.println("Wait for it...");
       delay(1000);
       n = 2;
       
@@ -79,7 +87,9 @@ void leerbit() {
             leerparo = mySerial.read();
         }
         if (leerparo == 'x') {
+          mySerial.println("-----");
           mySerial.println("PARO");
+          mySerial.println("-----");
           leerparo = 0;
           paro = 1;
           wtv020sd16p.stopVoice(); // Comentario temporal
@@ -95,12 +105,16 @@ void leerbit() {
         }
         n++;
       }
+      
+      if(paro)
+        break;
+        
       // Se espera 1 segundo
       mySerial.println();
       delay(1000);
     }
     mySerial.println();
   }
-  apagar();
+  //apagar();
 
 }
