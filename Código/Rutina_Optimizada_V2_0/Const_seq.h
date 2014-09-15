@@ -2,26 +2,26 @@
 #define CONST_SEQ_H
 
 /* SECUENCIA 1 */
-int const seq1[20]={0x081,    //hex 81, dec 129
-                    0x809,   //hex 809, dec 2057
-                    0x300,   //hex 300, dec 768
-                    0x211,   //hex 211, dec 529
-                    0x041,    //hex 41, dec 65
-                    0x460,   //hex 460, dec 1120
-                    0x448,   //hex 448, dec 1096
-                    0x00E,     //hex E, dec 14
-                    0x081,    //hex 81, dec 129
-                    0x288,   //hex 288, dec 648
-                    0x081,    //hex 81, dec 129
-                    0x809,   //hex 809, dec 2057
-                    0x300,   //hex 300, dec 768
-                    0x211,   //hex 211, dec 529
-                    0x041,    //hex 41, dec 65
-                    0x460,   //hex 460, dec 1120
-                    0x448,   //hex 448, dec 1096
-                    0x00E,     //hex E, dec 14
-                    0x244,   //hex 244, dec 580
-                    0x00C};     //hex C, dec 12
+int const seq1[20]={0x102,//0x081,    //hex 81, dec 129
+                    0x212,//0x488,//0x809,   //hex 809, dec 2057
+                    0x00A,   //hex 300, dec 768
+                    0x502,   //hex 211, dec 529
+                    0x410,    //hex 41, dec 65
+                    0x054,   //hex 460, dec 1120
+                    0xA94,   //hex 448, dec 1096
+                    0x080,     //hex E, dec 14
+                    0x420,    //hex 81, dec 129
+                    0x0A2,   //hex 288, dec 648
+                    0x420,    //hex 81, dec 129
+                    0x481,   //hex 809, dec 2057
+                    0x50A,   //hex 300, dec 768
+                    0x002,   //hex 211, dec 529
+                    0x410,    //hex 41, dec 65
+                    0x054,   //hex 460, dec 1120
+                    0x094,   //hex 448, dec 1096
+                    0xA80,     //hex E, dec 14
+                    0x212,   //hex 244, dec 580
+                    0x280};     //hex C, dec 12
 
 /* SECUENCIA 2 */                    
 int const seq2[20]={0x282,   //hex 282, dec 642

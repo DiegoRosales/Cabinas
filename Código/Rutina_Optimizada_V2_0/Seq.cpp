@@ -1,4 +1,5 @@
 #include "Seq.h"
+#include "TimerOne.h"
 
 extern Wtv020sd16p wtv020sd16p;
 extern int paro;
@@ -8,9 +9,12 @@ extern int n;
 extern bool I2C;
 extern int leerparo;
 extern ShiftReg shiftReg;
-extern bool ROJO;
-extern bool VERDE;
-extern bool AZUL;
+extern int ROJO;
+extern bool ROJO1;
+extern int VERDE;
+extern bool VERDE1;
+extern bool AZUL1;
+extern int AZUL;
 
 /* Función para apagar todos los LEDs y el MP3 */
 void apagar() {
@@ -20,9 +24,12 @@ void apagar() {
   }
   wtv020sd16p.stopVoice(); //Para detener reproducción de MP3 // Comentario temporal
   mySerial.flush();
-  ROJO = false;
-  VERDE = false;
-  AZUL = false;
+  ROJO1 = false;
+  ROJO = 0;
+  VERDE = 0;
+  VERDE1 = false;
+  AZUL1 = false;
+  AZUL = 0;
   mySerial.println("Todo listo!");
   mySerial.println("----------------------------");
   mySerial.println();
@@ -38,8 +45,9 @@ void leerbit() {
     mySerial.print("/");
     mySerial.print(secuencia[i + 1]);
     mySerial.println();
+    
     for (int j = 0; j < 15; j++) {
-      n = 2;
+      n = 0;
       // Se detiene
       if (paro)
         break;
@@ -75,9 +83,9 @@ void leerbit() {
         break;
       // Se espera 1 segundo
       mySerial.println();
-      //mySerial.println("Wait for it...");
+      mySerial.println("Wait for it...");
       delay(1000);
-      n = 2;
+      n = 0;
       
       // Enciende el resto de los LEDs
       for (int m = 11; m >= 0; m--) {
