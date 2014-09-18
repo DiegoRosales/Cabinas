@@ -8,5 +8,6 @@
 
 void apagar(); /* Función para apagar todos los LEDs y el MP3 */
 void leerbit();
+void apagarLeds();
 
 #endif

@@ -34,7 +34,17 @@ void apagar() {
   mySerial.println("----------------------------");
   mySerial.println();
 }
-
+void apagarLeds(){
+  for (int i = 0; i < 12; i++) {
+    shiftReg.digitalWriteMS(1, i, LOW);
+  }
+  ROJO1 = false;
+  ROJO = 0;
+  VERDE = 0;
+  VERDE1 = false;
+  AZUL1 = false;
+  AZUL = 0;
+}
 // Ejecuta la rutina
 void leerbit() {
 
@@ -83,8 +93,8 @@ void leerbit() {
         break;
       // Se espera 1 segundo
       mySerial.println();
-      mySerial.println("Wait for it...");
-      delay(1000);
+      //mySerial.println("Wait for it...");
+      delay(200);
       n = 0;
       
       // Enciende el resto de los LEDs
@@ -119,7 +129,7 @@ void leerbit() {
         
       // Se espera 1 segundo
       mySerial.println();
-      delay(1000);
+      delay(200);
     }
     mySerial.println();
   }
