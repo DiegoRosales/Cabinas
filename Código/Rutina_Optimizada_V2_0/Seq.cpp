@@ -51,10 +51,10 @@ void leerbit() {
   for (int i = 0; i < 20; i = i + 2) {
     if (paro)
       break;
-    mySerial.print(secuencia[i]);
-    mySerial.print("/");
-    mySerial.print(secuencia[i + 1]);
-    mySerial.println();
+    //mySerial.print(secuencia[i]);
+    //mySerial.print("/");
+    //mySerial.print(secuencia[i + 1]);
+    //mySerial.println();
     
     for (int j = 0; j < 15; j++) {
       n = 0;
@@ -80,11 +80,11 @@ void leerbit() {
         // Enciende los LEDs
         if (bitRead(secuencia[i], k)) {
           shiftReg.digitalWriteMS(1, n, HIGH);
-          mySerial.print("1");
+          //mySerial.print("1");
         }
         else {
           shiftReg.digitalWriteMS(1, n, LOW);
-          mySerial.print("0");
+          //mySerial.print("0");
         }
         n++;
       }
@@ -92,7 +92,7 @@ void leerbit() {
       if(paro)
         break;
       // Se espera 1 segundo
-      mySerial.println();
+      //mySerial.println();
       //mySerial.println("Wait for it...");
       delay(200);
       n = 0;
@@ -116,10 +116,10 @@ void leerbit() {
         // Enciende los LEDs
         if (bitRead(secuencia[i + 1], m)) {
           shiftReg.digitalWriteMS(1, n, HIGH);
-          mySerial.print("1");
+          //mySerial.print("1");
         } else {
           shiftReg.digitalWriteMS(1, n, LOW);
-          mySerial.print("0");
+          //mySerial.print("0");
         }
         n++;
       }
@@ -128,10 +128,10 @@ void leerbit() {
         break;
         
       // Se espera 1 segundo
-      mySerial.println();
+      //mySerial.println();
       delay(200);
     }
-    mySerial.println();
+    //mySerial.println();
   }
   //apagar();
 
