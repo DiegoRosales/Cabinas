@@ -2,13 +2,13 @@ Proyecto Cabinas
 =======
 ---
 
-**Última revisión del PCB del control:** 04/08/2014.
+**Última revisión del PCB del control:** 09/09/2014.
 
 **Última revisión del PCB de la botonera:** 29/07/2014.
 
-**Última revisión del código del control:** 25/07/2014.
+**Última revisión del código del control:** 23/09/2014.
 
-**Última revisión del código de la botonera:** 29/07/2014
+**Última revisión del código de la botonera:** 1/09/2014
 
 
 # Esquemático del PCB de control
