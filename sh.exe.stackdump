@@ -6,5 +6,5 @@ cs=0023 ds=002B es=002B fs=0053 gs=002B ss=002B
 Stack trace:
 Frame     Function  Args
 0028F08C  004C7968  (00070006, 00090008, 673EC868, 000D000C)
-00030002  00050004  (00E80000, 00040000, 15C00000, 1DD00000)
- 358442 [main] sh 7632 handle_exceptions: Error while dumping state (probably corrupted stack)
+00030002  00050004  (00E80000, 00040000, 19EC0000, 0CC80000)
+ 484976 [main] sh 3272 handle_exceptions: Error while dumping state (probably corrupted stack)

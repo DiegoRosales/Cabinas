@@ -9,5 +9,6 @@
 void apagar(); /* Función para apagar todos los LEDs y el MP3 */
 void leerbit();
 void apagarLeds();
+void ejecutarRutina(int rutina/*, int execType*/);
 
 #endif

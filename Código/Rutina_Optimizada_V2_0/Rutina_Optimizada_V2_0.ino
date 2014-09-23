@@ -23,11 +23,13 @@ int secuencia[20];   // Matriz de transferencia/copia de secuencias
 int leerparo;        // Variable auxiliar para disparar paro
 int paro;            // Variable que identifica si se precionó la tecla/botón paro
 bool ROJO1 = false;
-int ROJO = 0;
+bool VERDE1 = false;
 bool AZUL1 = false;
+int ROJO = 0;
 int AZUL = 0;
 int VERDE = 0;
-bool VERDE1 = false;
+int rutina_temp = 1;
+int rutina_temp2 = 4;
 
 // --- Modules ---
 ShiftReg shiftReg;
@@ -162,7 +164,7 @@ void loop() {
 
     Serial.flush();
     Serial.print("El numero de codigo es: "); // Prueba
-    Serial.println(rutina); // Prueba
+    Serial.println(rutina-49); // Prueba
     Serial.println();
 
     switch (rutina) {
@@ -171,88 +173,10 @@ void loop() {
       case '1':
       case '2':
       case '3':
-        paro = 0;
-        apagarLeds();
-        mySerial.print("Secuencia ");
-        mySerial.print(rutina);
-        mySerial.println();
-        //wtv020sd16p.reset();
-        delay(300);
-        switch (rutina) {
-          case '1':
-            wtv020sd16p.asyncPlayVoice(0); // Comentario temporal
-            break;
-          case '2':
-            wtv020sd16p.asyncPlayVoice(1);
-            break;
-          case '3':
-            wtv020sd16p.asyncPlayVoice(2);
-            break;
-        }
-        // Buffer de la secuencia
-        if(rutina == '1'){
-          for (int i = 0; i < 20; i++)
-            secuencia[i] = seq1[i];
-        }else if(rutina == '2'){
-          for (int i = 0; i < 20; i++)
-            secuencia[i] = seq2[i];
-        }else{
-          for (int i = 0; i < 20; i++)
-            secuencia[i] = seq3[i];
-        }
-        leerbit();
-        apagar();
-        break;
-
-        // Rutina 4
       case '4':
-        paro = 0;
-        apagarLeds();
-        mySerial.print("Secuencia 4");
-        mySerial.println();
-        wtv020sd16p.asyncPlayVoice(3); // Comentario temporal
-        // Buffer de la secuencia
-        for (int i = 0; i < 20; i++)
-          secuencia[i] = seq1[i];
-        // Repite la secuencia
-        for (int i = 0; i < 3; i++)
-          leerbit();
-        apagar();
-        break;
-
-        // Rutina 5
       case '5':
-        paro = 0;
-        apagarLeds();
-        mySerial.print("Secuencia 5");
-        mySerial.println();
-        wtv020sd16p.asyncPlayVoice(4); // Comentario temporal
-        // Buffer de la secuencia
-        for (int i = 0; i < 20; i++) {
-          secuencia[i] = seq2[i];
-        }
-        // Repite la secuencia
-        for (int i = 0; i < 3; i++)
-          leerbit();
-        apagar();
-        break;
-
-        // Rutina 6
       case '6':
-        paro = 0;
-        apagarLeds();
-        mySerial.print("Secuencia 6");
-        mySerial.println();
-        wtv020sd16p.asyncPlayVoice(5); // Comentario temporal
-        // Buffer de la secuencia
-        for (int i = 0; i < 20; i++) {
-          secuencia[i] = seq3[i];
-          // Repite la secuencia
-        }
-        Serial.println("Leerbit");
-        for (int i = 0; i < 3; i++)
-          leerbit();
-        apagar();
+        ejecutarRutina(rutina);
         break;
 
         /*---- COLORES SÓLIDOS ---*/
@@ -341,6 +265,17 @@ void loop() {
         mySerial.println();
         break;
 
+      // Va ciclando las secuencias
+      case '*':
+        rutina_temp = 1;
+        ejecutarRutina(rutina_temp+48);
+        break;
+        
+      case '#':
+        rutina_temp2 = 4;
+        ejecutarRutina(rutina_temp2+48);
+        break;
+        
         // Se apaga todo
       case 'x':
         apagar();
