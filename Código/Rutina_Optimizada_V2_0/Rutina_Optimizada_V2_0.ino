@@ -6,6 +6,8 @@
 #include "Seq.h"
 #include "TimerOne.h"
 
+#define TIEMPOMAXIMO 25
+
 extern int const seq1[20];
 extern int const seq2[20];
 extern int const seq3[20];
@@ -30,7 +32,7 @@ int AZUL = 0;
 int VERDE = 0;
 int rutina_temp = 1;
 int rutina_temp2 = 4;
-
+int tiempoMaximo = 0;
 // --- Modules ---
 ShiftReg shiftReg;
 Wtv020sd16p wtv020sd16p(resetPin, clockPin, dataPin, busyPin); //Se declara el modulo MP3
@@ -97,7 +99,7 @@ void setup() {
 void LEDTest() {
  
   if(VERDE == 2){
-    mySerial.println("Verde parpadeando");
+    //mySerial.println("Verde parpadeando");
     for (int i = 2; i < 12; i = i + 3) {
       if (VERDE1 == 0)
         shiftReg.digitalWriteMS(1, i, HIGH);
@@ -108,7 +110,7 @@ void LEDTest() {
   }
   
   if(ROJO == 2){
-    mySerial.println("Rojo parpadeando");
+    //mySerial.println("Rojo parpadeando");
     for (int i = 1; i < 12; i = i + 3) {
       if (ROJO1 == 0)
         shiftReg.digitalWriteMS(1, i, HIGH);
@@ -126,6 +128,21 @@ void LEDTest() {
         shiftReg.digitalWriteMS(1, i, LOW);
     }
     AZUL1 = !AZUL1;
+  }
+  
+  if(AZUL != 0 && VERDE != 0  && ROJO != 0){
+    tiempoMaximo++;
+    if(tiempoMaximo%5 == 0){
+      mySerial.print("Apagando en ");
+      mySerial.print(TIEMPOMAXIMO/5 - tiempoMaximo/5);
+      mySerial.println(" segundos");
+    }
+  }else
+    tiempoMaximo = 0;
+  
+  if(tiempoMaximo > TIEMPOMAXIMO){
+    apagar();
+    tiempoMaximo = 0;
   }
 }
 
@@ -158,9 +175,9 @@ void loop() {
       rutina = Serial.read();
     I2C = false;
     mySerial.flush();
-    mySerial.print("El numero de codigo es: "); // Prueba
-    mySerial.println(rutina); // Prueba
-    mySerial.println();
+    //mySerial.print("El numero de codigo es: "); // Prueba
+    //mySerial.println(rutina); // Prueba
+    //mySerial.println();
 
     Serial.flush();
     Serial.print("El numero de codigo es: "); // Prueba
@@ -201,7 +218,7 @@ void loop() {
             AZUL = 0;
           else
             AZUL++;
-        mySerial.println(AZUL);
+        //mySerial.println(AZUL);
         paro = 0;
         mySerial.println("----------------------------");
         mySerial.println();
@@ -260,7 +277,7 @@ void loop() {
           else
             VERDE++;
         paro = 0;
-        mySerial.println(VERDE);
+        //mySerial.println(VERDE);
         mySerial.println("----------------------------");
         mySerial.println();
         break;
