@@ -49,24 +49,31 @@ void loop()
         Wire.beginTransmission(4); // transmit to device #4
         Wire.write('x');        // sends five bytes
         Wire.endTransmission();    // stop transmitting
+        break;
       
       case 'A': /* Red */
         Wire.beginTransmission(4); // transmit to device #4
         Wire.write('7');        // sends five bytes
         Wire.endTransmission();    // stop transmitting
+        break;
+        
       case 'B': /* Green */
         Wire.beginTransmission(4); // transmit to device #4
         Wire.write('8');        // sends five bytes
         Wire.endTransmission();    // stop transmitting
+        break;
+        
       case 'C': /* Blue */
         Wire.beginTransmission(4); // transmit to device #4
         Wire.write('9');        // sends five bytes
         Wire.endTransmission();    // stop transmitting
+        break;
         
       default:
         Wire.beginTransmission(4); // transmit to device #4
         Wire.write(key);        // sends five bytes
         Wire.endTransmission();    // stop transmitting
+        break;
     }
     Serial.println(key);
   }
