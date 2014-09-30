@@ -30,8 +30,8 @@ bool AZUL1 = false;
 int ROJO = 0;
 int AZUL = 0;
 int VERDE = 0;
-int rutina_temp = 1;
-int rutina_temp2 = 4;
+int rutina_temp = 0;
+int rutina_temp2 = 3;
 int tiempoMaximo = 0;
 // --- Modules ---
 ShiftReg shiftReg;
@@ -284,13 +284,31 @@ void loop() {
 
       // Va ciclando las secuencias
       case '*':
-        rutina_temp = 1;
-        ejecutarRutina(rutina_temp+48);
+        //rutina_temp = 1;
+        //ejecutarRutina(rutina_temp+48);
+        if(rutina_temp > 2){
+          apagar();
+          rutina_temp = 0;
+        }else{
+          mySerial.print("Iniciando cancion ");
+          mySerial.println(rutina_temp + 1);
+          wtv020sd16p.asyncPlayVoice(rutina_temp);
+          rutina_temp++;
+        }
         break;
         
       case '#':
-        rutina_temp2 = 4;
-        ejecutarRutina(rutina_temp2+48);
+        //rutina_temp2 = 3;
+
+        if(rutina_temp2 > 5){
+          apagar();
+          rutina_temp2 = 3;
+        }else{
+          mySerial.print("Iniciando cancion ");
+          mySerial.println(rutina_temp2 + 1);
+          wtv020sd16p.asyncPlayVoice(rutina_temp2);
+          rutina_temp2++;
+        }
         break;
         
         // Se apaga todo
