@@ -20,6 +20,7 @@ extern bool VERDE1;
 extern bool AZUL1;
 extern int AZUL;
 extern int rutina_temp, rutina_temp2;
+extern int rutina;
 int execTimes = 0;
 
 void ejecutarRutina(int rutina/*, int execType*/) {
@@ -82,6 +83,7 @@ void apagar() {
   }
   wtv020sd16p.stopVoice(); //Para detener reproducción de MP3 // Comentario temporal
   mySerial.flush();
+  rutina = 0;
   ROJO1 = false;
   ROJO = 0;
   VERDE = 0;

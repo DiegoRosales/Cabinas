@@ -152,11 +152,13 @@ void LEDTest() {
 void receiveEvent(int howMany)
 {
   int x = Wire.read();
-  if (x == 'x')
-    paro = x;
-  else
+  if (x == 'x'){
+    apagar();
+    leerparo = 'x';
+    //mySerial.println("I2C Paro");
+  }else
     rutina = x;
-  mySerial.println("Wire!!");
+  mySerial.println("Botonera");
   mySerial.println(x);
   I2C = true;
 }
