@@ -96,6 +96,7 @@ void apagar() {
   mySerial.println("----------------------------");
   mySerial.println();
 }
+
 void apagarLeds() {
   for (int i = 0; i < 12; i++) {
     shiftReg.digitalWriteMS(1, i, LOW);
@@ -107,10 +108,11 @@ void apagarLeds() {
   AZUL1 = false;
   AZUL = 0;
 }
+
 // Ejecuta la rutina
 void leerbit() {
   int paro = 0;
-  for (int i = 0; i < 20; i = i + 2) {
+  for (int i = 0; i < 16; i = i + 2) {
     if (paro)
       break;
     //mySerial.print(secuencia[i]);
