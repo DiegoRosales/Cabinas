@@ -1,0 +1,38 @@
+Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 11/12/2014 12:45:31
+
+BeginCmp
+TimeStamp = /5489DC92;
+Reference = K1;
+ValeurCmp = CONN_3;
+IdModule  = PIN_ARRAY_3X1;
+EndCmp
+
+BeginCmp
+TimeStamp = /5489DACD;
+Reference = MCU1;
+ValeurCmp = PRO_MINI;
+IdModule  = ProMiniThick;
+EndCmp
+
+BeginCmp
+TimeStamp = /5489DABE;
+Reference = MP31;
+ValeurCmp = VS1053_ADAFRUIT;
+IdModule  = VS1030_Adafruit;
+EndCmp
+
+BeginCmp
+TimeStamp = /5489E3D5;
+Reference = P1;
+ValeurCmp = CONN_2;
+IdModule  = PIN_ARRAY_2X1;
+EndCmp
+
+BeginCmp
+TimeStamp = /5489E5F6;
+Reference = P2;
+ValeurCmp = CONN_2;
+IdModule  = PIN_ARRAY_2X1;
+EndCmp
+
+EndListe
