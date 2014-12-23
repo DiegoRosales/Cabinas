@@ -1,6 +1,9 @@
 #include "Seq.h"
 #include "TimerOne.h"
 #include "Const_seq.h"
+#include <Wire.h>
+
+#define ID_MP3 5
 
 extern Wtv020sd16p wtv020sd16p;
 //extern int paro;
@@ -23,6 +26,18 @@ extern int rutina_temp, rutina_temp2;
 extern int rutina;
 int execTimes = 0;
 
+void changeTrack(char track){
+  if(track != 's'){
+      Wire.beginTransmission(ID_MP3); // transmit to device #ID_MP3
+      Wire.write('t');      // sends one byte
+      Wire.endTransmission();    // stop transmitting
+  }
+  Wire.beginTransmission(ID_MP3);
+  Wire.write(track);
+  Wire.endTransmission(false);
+  Wire.endTransmission(true);
+}
+
 void ejecutarRutina(int rutina/*, int execType*/) {
   execTimes++;
   /*mySerial.print("Numero de ejecuciones: ");
@@ -36,22 +51,22 @@ void ejecutarRutina(int rutina/*, int execType*/) {
   delay(300);
   switch (rutina) {
     case '1':
-      wtv020sd16p.asyncPlayVoice(0); // Comentario temporal
+      changeTrack(1);
       break;
     case '2':
-      wtv020sd16p.asyncPlayVoice(1);
+      changeTrack(2);
       break;
     case '3':
-      wtv020sd16p.asyncPlayVoice(2);
+      changeTrack(3);
       break;
     case '4':
-      wtv020sd16p.asyncPlayVoice(3);
+      changeTrack(4);
       break;
     case '5':
-      wtv020sd16p.asyncPlayVoice(4);
+      changeTrack(5);
       break;
     case '6':
-      wtv020sd16p.asyncPlayVoice(5);
+      changeTrack(6);
       break;
   }
   // Buffer de la secuencia
@@ -78,19 +93,25 @@ void ejecutarRutina(int rutina/*, int execType*/) {
 void apagar() {
   if(execTimes == 0)
     mySerial.println("Deteniendo, por favor espere...");
+  // Apaga las luces
   for (int i = 0; i < 12; i++) {
     shiftReg.digitalWriteMS(1, i, LOW);
   }
-  wtv020sd16p.stopVoice(); //Para detener reproducción de MP3 // Comentario temporal
-  mySerial.flush();
-  rutina = 0;
   ROJO1 = false;
-  ROJO = 0;
-  VERDE = 0;
   VERDE1 = false;
   AZUL1 = false;
+  ROJO = 0;
+  VERDE = 0;
   AZUL = 0;
+  mySerial.println("Luces apagadas."); 
   
+  // Apaga el MP3
+  changeTrack('s');
+  mySerial.println("Sonido apagado.");
+  
+  // Inicializa la variable de la rutina
+  rutina = 0;
+  mySerial.flush();
   if(execTimes == 0)
     mySerial.println("Todo listo!");
   mySerial.println("----------------------------");
@@ -255,5 +276,4 @@ void leerbit() {
     //mySerial.println();
   }
   //apagar();
-
 }

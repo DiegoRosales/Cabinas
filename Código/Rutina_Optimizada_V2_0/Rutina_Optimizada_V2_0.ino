@@ -8,6 +8,8 @@
 
 #define TIEMPOMAXIMO 25
 
+#define ID_BOTONERA 4
+
 extern int const seq1[20];
 extern int const seq2[20];
 extern int const seq3[20];
@@ -33,6 +35,7 @@ int VERDE = 0;
 int rutina_temp = 0;
 int rutina_temp2 = 3;
 int tiempoMaximo = 0;
+
 // --- Modules ---
 ShiftReg shiftReg;
 Wtv020sd16p wtv020sd16p(resetPin, clockPin, dataPin, busyPin); //Se declara el modulo MP3
@@ -45,6 +48,9 @@ void setup() {
   /*  Bluetooth Module & Serial Initialization  */
   mySerial.begin(9600);
   mySerial.println("Iniciando...");
+  mySerial.println("Hackerspace Cholula");
+  mySerial.println("Firmware V2.1");
+  mySerial.println("23/12/2014");
   Serial.begin(9600);
 
   /*----------------------*/
@@ -73,11 +79,11 @@ void setup() {
   pinMode(dataPin, OUTPUT);
   pinMode(clockPin, OUTPUT);
   wtv020sd16p.reset(); // MP3 Reset
-  while (digitalRead(busyPin) == HIGH) {
-    Serial.println("Cargando MP3...");
-    mySerial.println("Cargando MP3...");
-    delay(100);
-  }
+  //while (digitalRead(busyPin) == HIGH) {
+  //  Serial.println("Cargando MP3...");
+  //  mySerial.println("Cargando MP3...");
+  //  delay(100);
+  //}
   wtv020sd16p.unmute();
   //wtv020sd16p.playVoice(1); // Test
   
@@ -141,8 +147,18 @@ void LEDTest() {
     tiempoMaximo = 0;
   
   if(tiempoMaximo > TIEMPOMAXIMO){
-    apagar();
     tiempoMaximo = 0;
+    mySerial.println("Apagando luces...");
+    for(int i=0; i<12; i++)
+      shiftReg.digitalWriteMS(1, i, LOW);
+    ROJO1 = false;
+    VERDE1 = false;
+    AZUL1 = false;
+    ROJO = 0;
+    VERDE = 0;
+    AZUL = 0;
+    mySerial.println("Luces apagadas");
+    mySerial.println("------------------------------");
   }
 }
 
@@ -294,7 +310,8 @@ void loop() {
         }else{
           mySerial.print("Iniciando cancion ");
           mySerial.println(rutina_temp + 1);
-          wtv020sd16p.asyncPlayVoice(rutina_temp);
+          //wtv020sd16p.asyncPlayVoice(rutina_temp);
+          changeTrack(rutina_temp+1);
           rutina_temp++;
         }
         break;
@@ -308,7 +325,8 @@ void loop() {
         }else{
           mySerial.print("Iniciando cancion ");
           mySerial.println(rutina_temp2 + 1);
-          wtv020sd16p.asyncPlayVoice(rutina_temp2);
+          //wtv020sd16p.asyncPlayVoice(rutina_temp2);
+          changeTrack(rutina_temp2+1);
           rutina_temp2++;
         }
         break;
@@ -323,4 +341,3 @@ void loop() {
     }
   }
 }
-
