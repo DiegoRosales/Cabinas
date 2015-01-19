@@ -30,7 +30,7 @@ void setup() {
   else Serial.println("SD card initialized correctly!");  // initialise the SD card
   
   // Set volume for left, right channels. lower numbers == louder volume!
-  musicPlayer.setVolume(20,20);
+  musicPlayer.setVolume(5,5);
 
   // Timer interrupts are not suggested, better to use DREQ interrupt!
   //musicPlayer.useInterrupt(VS1053_FILEPLAYER_TIMER0_INT); // timer int
@@ -45,11 +45,11 @@ void setup() {
   Wire.onReceive(receiveEvent); // register event
   
   // Play one file, don't return until complete
-  Serial.println(F("Playing track 001"));
-  if(!musicPlayer.playFullFile("track001.mp3")) Serial.println("Couldn't play track001.mp3");
+  //Serial.println(F("Playing track 001"));
+  //if(!musicPlayer.playFullFile("track001.mp3")) Serial.println("Couldn't play track001.mp3");
   // Play another file in the background, REQUIRES interrupts!
-  Serial.println(F("Playing track 002"));
-  if(!musicPlayer.startPlayingFile("track002.mp3")) Serial.println("Couldn't play track002.mp3");
+  //Serial.println(F("Playing track 002"));
+  //if(!musicPlayer.startPlayingFile("track002.mp3")) Serial.println("Couldn't play track002.mp3");
 }
 
 void loop() {

@@ -34,7 +34,7 @@ void changeTrack(char track){
   }
   Wire.beginTransmission(ID_MP3);
   Wire.write(track);
-  Wire.endTransmission(false);
+  //Wire.endTransmission(false);
   Wire.endTransmission(true);
 }
 
@@ -105,15 +105,17 @@ void apagar() {
   AZUL = 0;
   mySerial.println("Luces apagadas."); 
   
-  // Apaga el MP3
-  changeTrack('s');
-  mySerial.println("Sonido apagado.");
+
   
   // Inicializa la variable de la rutina
   rutina = 0;
   mySerial.flush();
-  if(execTimes == 0)
+  if(execTimes == 0){
+    // Apaga el MP3
+    changeTrack('s');
+    mySerial.println("Sonido apagado.");
     mySerial.println("Todo listo!");
+  }
   mySerial.println("----------------------------");
   mySerial.println();
 }

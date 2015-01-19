@@ -41,13 +41,21 @@ void setup()
 
 void loop()
 {
-  char key = kpd.getKey();
+  //char key = kpd.getKey();
+  char key;
+
+  if(Serial.available()){
+    key = Serial.read();
+    Serial.println(key);
+  }
   if(key)  // Check for a valid key.
   {
+    Serial.println("if(key)");
     switch(key){
+      case 0:
       case '0':
         Wire.beginTransmission(4); // transmit to device #4
-        Wire.write('x');        // sends five bytes
+        Wire.write(71);        // sends five bytes
         Wire.endTransmission();    // stop transmitting
         break;
       
@@ -70,11 +78,14 @@ void loop()
         break;
         
       default:
+        Serial.println("switch(key) default");
         Wire.beginTransmission(4); // transmit to device #4
         Wire.write(key);        // sends five bytes
         Wire.endTransmission();    // stop transmitting
         break;
     }
-    Serial.println(key);
+    Serial.println("END switch(key)");
+    Serial.println(key, BIN);
+    Serial.println("END if(key)");
   }
 }

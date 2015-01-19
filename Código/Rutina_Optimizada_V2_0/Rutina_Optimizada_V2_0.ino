@@ -49,8 +49,8 @@ void setup() {
   mySerial.begin(9600);
   mySerial.println("Iniciando...");
   mySerial.println("Hackerspace Cholula");
-  mySerial.println("Firmware V2.1");
-  mySerial.println("23/12/2014");
+  mySerial.println("Firmware V2.2");
+  mySerial.println("19/01/2015");
   Serial.begin(9600);
 
   /*----------------------*/
@@ -92,8 +92,9 @@ void setup() {
   //Timer1.stop();
   // Controller is ready
   mySerial.println("Listo!!");
-  mySerial.println("Favor de ingresar la rutina...");
   mySerial.println("------------------------------");
+  mySerial.println("Favor de ingresar la rutina...");
+  
   mySerial.println();
 
   Serial.println("Listo!!");
@@ -167,15 +168,16 @@ void LEDTest() {
 // Rutina de interrupción de I2C
 void receiveEvent(int howMany)
 {
-  int x = Wire.read();
-  if (x == 'x'){
-    apagar();
+  Serial.println("Wire!!");
+  char x = Wire.read();
+  if (x == 71){
+    //apagar();
     leerparo = 'x';
-    //mySerial.println("I2C Paro");
+    Serial.println("I2C Paro");
   }else
     rutina = x;
-  mySerial.println("Botonera");
-  mySerial.println(x);
+  Serial.println("Botonera");
+  Serial.println(x);
   I2C = true;
 }
 
@@ -193,13 +195,10 @@ void loop() {
       rutina = Serial.read();
     I2C = false;
     mySerial.flush();
-    //mySerial.print("El numero de codigo es: "); // Prueba
-    //mySerial.println(rutina); // Prueba
-    //mySerial.println();
 
     Serial.flush();
     Serial.print("El numero de codigo es: "); // Prueba
-    Serial.println(rutina-49); // Prueba
+    Serial.println(rutina-49, BIN); // Prueba
     Serial.println();
 
     switch (rutina) {
