@@ -1,4 +1,4 @@
-update=04/08/2014 14:45:23
+update=21/01/2015 14:07:54
 version=1
 last_client=eeschema
 [general]
@@ -28,7 +28,7 @@ DrawSegmentWidth=0.200000000000
 BoardOutlineThickness=0.100000000000
 ModuleOutlineThickness=0.150000000000
 [pcbnew/libraries]
-LibDir=../../GitHub/Capacitors_ThroughHole.pretty
+LibDir=../../../KiCad_Libraries
 LibName1=sockets
 LibName2=connect
 LibName3=discret
@@ -57,6 +57,8 @@ LibName25=D:/GitHub/KiCad_Libraries/Screws
 LibName26=D:/GitHub/KiCad_Libraries/CAP_POL
 LibName27=PinMod
 LibName28=ShiftReg
+LibName29=MP3_MODULES
+LibName30=Pots
 [eeschema]
 version=1
 LibDir=
@@ -64,7 +66,7 @@ NetFmtName=PcbnewAdvanced
 RptD_X=0
 RptD_Y=100
 RptLab=1
-LabSize=120
+LabSize=100
 [eeschema/libraries]
 LibName1=power
 LibName2=device

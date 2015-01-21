@@ -1,8 +1,15 @@
-Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 14/10/2014 12:41:51
+Cmp-Mod V01 Created by CvPcb (2013-07-07 BZR 4022)-stable date = 21/01/2015 13:09:27
 
 BeginCmp
 TimeStamp = /538DF7F4;
 Reference = A1;
+ValeurCmp = PROMINI;
+IdModule  = ProMini;
+EndCmp
+
+BeginCmp
+TimeStamp = /54BD6F88;
+Reference = A2;
 ValeurCmp = PROMINI;
 IdModule  = ProMini;
 EndCmp
@@ -19,13 +26,6 @@ TimeStamp = /53971B69;
 Reference = C2;
 ValeurCmp = 0.1uF;
 IdModule  = C1V5;
-EndCmp
-
-BeginCmp
-TimeStamp = /53B30525;
-Reference = C3;
-ValeurCmp = 0.1uF;
-IdModule  = C1;
 EndCmp
 
 BeginCmp
@@ -61,20 +61,6 @@ TimeStamp = /543D5287;
 Reference = C8;
 ValeurCmp = 0.22uF;
 IdModule  = C1;
-EndCmp
-
-BeginCmp
-TimeStamp = /53B35196;
-Reference = C9;
-ValeurCmp = 1uF;
-IdModule  = C1V5;
-EndCmp
-
-BeginCmp
-TimeStamp = /53B351A3;
-Reference = C10;
-ValeurCmp = 1uF;
-IdModule  = C1V5;
 EndCmp
 
 BeginCmp
@@ -330,10 +316,24 @@ IdModule  = PIN_ARRAY_2X1;
 EndCmp
 
 BeginCmp
-TimeStamp = /53B32C08;
-Reference = M1;
-ValeurCmp = WTV020-SD;
-IdModule  = MP3;
+TimeStamp = /54C023C7;
+Reference = K1;
+ValeurCmp = CONN_3;
+IdModule  = PIN_ARRAY_3X1;
+EndCmp
+
+BeginCmp
+TimeStamp = /54C04452;
+Reference = K2;
+ValeurCmp = CONN_3;
+IdModule  = PIN_ARRAY_3X1;
+EndCmp
+
+BeginCmp
+TimeStamp = /54BD6C8C;
+Reference = MP31;
+ValeurCmp = VS1053_ADAFRUIT;
+IdModule  = VS1030_Adafruit;
 EndCmp
 
 BeginCmp
@@ -404,13 +404,6 @@ TimeStamp = /543DA067;
 Reference = P10;
 ValeurCmp = CONN_2;
 IdModule  = PINHEAD1-2;
-EndCmp
-
-BeginCmp
-TimeStamp = /543DD202;
-Reference = P11;
-ValeurCmp = CONN_6;
-IdModule  = PINHEAD1-6;
 EndCmp
 
 BeginCmp
@@ -680,17 +673,66 @@ IdModule  = R1;
 EndCmp
 
 BeginCmp
-TimeStamp = /53B35187;
-Reference = REG1;
-ValeurCmp = NPC1700;
-IdModule  = TO92;
+TimeStamp = /54C005F8;
+Reference = R26;
+ValeurCmp = 10k;
+IdModule  = R1;
+EndCmp
+
+BeginCmp
+TimeStamp = /54C00B43;
+Reference = R27;
+ValeurCmp = 10k;
+IdModule  = R1;
+EndCmp
+
+BeginCmp
+TimeStamp = /54C01086;
+Reference = R28;
+ValeurCmp = 10k;
+IdModule  = R1;
+EndCmp
+
+BeginCmp
+TimeStamp = /54C01B35;
+Reference = R29;
+ValeurCmp = R;
+IdModule  = R1;
+EndCmp
+
+BeginCmp
+TimeStamp = /54C01B29;
+Reference = R30;
+ValeurCmp = R;
+IdModule  = R1;
+EndCmp
+
+BeginCmp
+TimeStamp = /54C01B2F;
+Reference = R31;
+ValeurCmp = R;
+IdModule  = R1;
 EndCmp
 
 BeginCmp
 TimeStamp = /543D52C3;
 Reference = RV1;
 ValeurCmp = 10k;
-IdModule  = PIN_ARRAY_3X1;
+IdModule  = Trimpot;
+EndCmp
+
+BeginCmp
+TimeStamp = /54C077AE;
+Reference = RV2;
+ValeurCmp = 10k;
+IdModule  = Trimpot;
+EndCmp
+
+BeginCmp
+TimeStamp = /54C077B4;
+Reference = RV3;
+ValeurCmp = 10k;
+IdModule  = Trimpot;
 EndCmp
 
 BeginCmp
@@ -799,22 +841,8 @@ IdModule  = TactileSW_2;
 EndCmp
 
 BeginCmp
-TimeStamp = /54121AC6;
-Reference = TP1;
-ValeurCmp = CONN_3;
-IdModule  = PIN_ARRAY_3X1;
-EndCmp
-
-BeginCmp
 TimeStamp = /541215BD;
 Reference = TP2;
-ValeurCmp = CONN_2;
-IdModule  = PIN_ARRAY_2X1;
-EndCmp
-
-BeginCmp
-TimeStamp = /54121A5A;
-Reference = TP3;
 ValeurCmp = CONN_2;
 IdModule  = PIN_ARRAY_2X1;
 EndCmp
@@ -855,7 +883,7 @@ IdModule  = ShiftReg;
 EndCmp
 
 BeginCmp
-TimeStamp = /543D3C1E;
+TimeStamp = /54C01B86;
 Reference = U6;
 ValeurCmp = TL082;
 IdModule  = DIP-8__300_ELL;
