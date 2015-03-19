@@ -79,9 +79,7 @@ void secuencia::apagarLeds(){
   VERDE = 0;
   encenderLeds(0);
   ledsEncendidos = 0;  
-  serialPrintln("Todo listo");
-  serialPrintln("====================");
-  serialPrintln("Seleccione la rutina");
+  serialPrintln("LEDs apagados!");
 }
 
 void proteccionLeds(){
