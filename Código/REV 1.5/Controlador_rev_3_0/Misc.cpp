@@ -2,6 +2,7 @@
 
 extern secuencia mSecuencia;
 uint8_t contador = 0;
+uint16_t contadorTiempo = 0;
 
 void secuencia::serialPrint(String mString){
     mySerial.print(mString);
@@ -83,6 +84,8 @@ void secuencia::apagarLeds(){
 }
 
 void proteccionLeds(){
+  /* Esta sección controla el tiempo que toma
+  ** el sistema de protección de los LEDs en activarse */
   if(mSecuencia.getLeds()){
     contador ++;
     if(contador == TIEMPO_MAXIMO/5 - 1){
@@ -96,6 +99,21 @@ void proteccionLeds(){
     mSecuencia.serialPrintln("");
     mSecuencia.apagarLeds();  
   }
+  /* Esta sección controla la información
+  ** del tiempo cada vez que se inicia una rutina */
+  if(mSecuencia.rutinaActivada()){
+      contadorTiempo++;
+      if(contadorTiempo%(5*TIEMPO) == 0){
+        mSecuencia.serialPrint(contadorTiempo/5);  
+        mSecuencia.serialPrintln(" segundos");
+      }
+  }else{
+    contadorTiempo = 0;  
+  }
+}
+
+bool secuencia::rutinaActivada(){
+  return rutinaEnCurso;  
 }
 
 void secuencia::pruebaMusica(char pistas){

@@ -82,10 +82,13 @@ void secuencia::prepararRutina(uint8_t rutina) {
 
 void secuencia::iniciarRutina(uint8_t NumSecuencia) {
   int seqBuffer[20];
+  rutinaEnCurso = 1;
+  // Copia la secuencia al buffer
   for (int i = 0; i < 20; i++) seqBuffer[i] = secuencias[NumSecuencia][i];
-
+  
+  // Inicia la secuencia
   for (int i = 0; i < 16; i += 2) {
-    for (int j = 0; j < 75; j++) {
+    for (int j = 0; j < 300; j++) {
       encenderLeds(seqBuffer[i]);
       delay(200);
       encenderLeds(seqBuffer[i + 1]);
@@ -114,6 +117,7 @@ void secuencia::encenderLeds(int leds) {
 void secuencia::rutinaParo() {
   serialPrintln("Deteniendo, por favor espere...");
   PARO = 0;
+  rutinaEnCurso = 0;
   apagarLeds();
   iniciarPista('s');
   serialPrintln("Todo listo");

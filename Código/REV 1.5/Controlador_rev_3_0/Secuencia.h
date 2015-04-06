@@ -13,6 +13,8 @@
 #define LEDS_ROJOS 0x492
 #define LEDS_VERDES 0x249
 
+#define TIEMPO 5 // Segundos
+
 //-------I2C-------
 #define ID_BOTONERA 4
 #define ID_MP3 5
@@ -27,6 +29,7 @@ class secuencia{
   // Pruebas
   int ledsEncendidos = 0;
   char pistaActual = 1;
+  bool rutinaEnCurso = 0;
   
   public:
     //----SECUENCIA.CPP----
@@ -50,6 +53,7 @@ class secuencia{
     bool getLeds();
     void apagarLeds();
     void pruebaMusica(char pistas);
+    bool rutinaActivada();
 };
 
 
