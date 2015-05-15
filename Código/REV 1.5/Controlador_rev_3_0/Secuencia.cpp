@@ -72,23 +72,40 @@ void secuencia::prepararRutina(uint8_t rutina) {
   iniciarPista(rutina);
 
   if ((rutina == 1) || (rutina == 4)) {
-    iniciarRutina(0);
+    iniciarRutina(0, rutina);
   } else if ((rutina == 2) || (rutina == 5)) {
-    iniciarRutina(1);
+    iniciarRutina(1, rutina);
   } else {
-    iniciarRutina(2);
+    iniciarRutina(2, rutina);
   }
 }
 
-void secuencia::iniciarRutina(uint8_t NumSecuencia) {
+void secuencia::iniciarRutina(uint8_t NumSecuencia, uint8_t numRutina) {
   int seqBuffer[20];
+  int numCiclos;
   rutinaEnCurso = 1;
+  
+  switch(numRutina){
+    case 1:
+    case 2:
+    case 3:
+      numCiclos = 75;
+      break;
+    case 4:
+    case 5:
+    case 6:
+      numCiclos = 300;
+      break;
+    default:
+      numCiclos = 75;
+      break;
+  }
   // Copia la secuencia al buffer
   for (int i = 0; i < 20; i++) seqBuffer[i] = secuencias[NumSecuencia][i];
   
   // Inicia la secuencia
   for (int i = 0; i < 16; i += 2) {
-    for (int j = 0; j < 300; j++) {
+    for (int j = 0; j < numCiclos; j++) {
       encenderLeds(seqBuffer[i]);
       delay(200);
       encenderLeds(seqBuffer[i + 1]);

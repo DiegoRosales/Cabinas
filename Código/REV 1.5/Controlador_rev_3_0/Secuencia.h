@@ -36,7 +36,7 @@ class secuencia{
     void begin();
     void esperando();
     void prepararRutina(uint8_t rutina);
-    void iniciarRutina(uint8_t NumSecuencia);
+    void iniciarRutina(uint8_t NumSecuencia, uint8_t numRutina);
     void encenderLeds(int leds);
     void rutinaParo();
     void iniciarPista(char pista);
